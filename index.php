@@ -1,4 +1,6 @@
 <?php
+	require 'settings.php';
+
 	$N = $_GET['N'];
 
 	if ($N <= 0)
