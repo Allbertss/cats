@@ -28,6 +28,15 @@
 	else
 		$redis->set($countN, $redis->get($countN) + 1);
 
+	if (!$redis->exists($N)) {
+		$breeds = explode("\n", file_get_contents('cats.txt'));
+		$keys = array_rand($breeds, 3);
+		$cats = [trim($breeds[$keys[0]]), trim($breeds[$keys[1]]), trim($breeds[$keys[2]])];
+		$stringCats = $cats[0] . ', ' . $cats[1] . ', ' . $cats[2];
+		$redis->setex($N, 60, $stringCats);
+	}
+		$cats = $redis->get($N);
+
 	//$redis->flushall(); // deletes all counts & cache
 	$redis->close();
 ?>
