@@ -33,7 +33,7 @@
 		$keys = array_rand($breeds, 3);
 		$cats = [trim($breeds[$keys[0]]), trim($breeds[$keys[1]]), trim($breeds[$keys[2]])];
 		$stringCats = $cats[0] . ', ' . $cats[1] . ', ' . $cats[2];
-		$redis->setex($N, 60, $stringCats);
+		$redis->setex($N, CACHE_TIME, $stringCats);
 	}
 		$cats = $redis->get($N);
 
