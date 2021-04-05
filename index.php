@@ -17,6 +17,11 @@
 			die($exception->getMessage());
 	}
 
+	if (!$redis->exists('countAll'))
+		$redis->set('countAll', 1);
+	else
+		$redis->set('countAll', $redis->get('countAll') + 1);
+
 	//$redis->flushall(); // deletes all counts & cache
 	$redis->close();
 ?>
