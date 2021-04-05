@@ -22,6 +22,12 @@
 	else
 		$redis->set('countAll', $redis->get('countAll') + 1);
 
+	$countN = 'count' . $N;
+	if (!$redis->exists($countN))
+		$redis->set($countN, 1);
+	else
+		$redis->set($countN, $redis->get($countN) + 1);
+
 	//$redis->flushall(); // deletes all counts & cache
 	$redis->close();
 ?>
