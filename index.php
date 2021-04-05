@@ -8,7 +8,7 @@
 
 	$redis = new Redis();
 	try {
-		$connectedRedis = $redis->connect('lamp-redis', '6379');
+		$connectedRedis = $redis->connect(HOSTNAME, PORT);
 		if (!$connectedRedis)
 			throw new Exception();
 	} catch (Exception $exception) {
