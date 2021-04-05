@@ -1,6 +1,7 @@
 <?php
 	require 'settings.php';
 
+	$date = new DateTime();
 	$N = $_GET['N'];
 
 	if ($N <= 0)
@@ -38,6 +39,16 @@
 	$cats = $redis->get($N);
 
 	echo($cats);
+
+	$cats = explode(',', $cats);
+	$json = [
+		'datetime' => $date->format('Y-m-d H:i:s'),
+		'N' => $N,
+		'Cats' => $cats,
+		'countAll' => $redis->get('countAll'),
+		'countN' => $redis->get($countN)
+	];
+	file_put_contents('log.txt', json_encode($json) . PHP_EOL, FILE_APPEND);
 
 	//$redis->flushall(); // deletes all counts & cache
 	$redis->close();
