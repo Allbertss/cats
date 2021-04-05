@@ -35,7 +35,9 @@
 		$stringCats = $cats[0] . ', ' . $cats[1] . ', ' . $cats[2];
 		$redis->setex($N, CACHE_TIME, $stringCats);
 	}
-		$cats = $redis->get($N);
+	$cats = $redis->get($N);
+
+	echo($cats);
 
 	//$redis->flushall(); // deletes all counts & cache
 	$redis->close();
